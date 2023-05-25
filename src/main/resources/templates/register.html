@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>register</title>
+    <script src="./JS/globalVariable.js"></script>
     <link rel="stylesheet" href="css/register.css">
     <link rel="icon" type="image/png" href="pictures/login.svg" />
     <link rel="shortcut icon" type="image/png" href="pics/login.svg" />
@@ -31,7 +32,6 @@
                 <label for="password">Password</label>
                 <input type="text" id="password">
             </div>
-
             <!-- 点击注册按钮之后，判断是否存在重复的用户名，若存在，则弹窗提示重新输入，否则跳转到个人信息界面“pi.html” -->
             <button class="register-btn" onclick="regis()">Register</button>
         </form>
@@ -43,7 +43,7 @@
                 var pw=document.getElementById("password").value;
                 var sendMess={"name":name,"password":pw,"email":email};
                 $.ajax({
-                    url : "http://localhost:8080/adduser",
+                    url :serve_port+"/adduser",
                     type : "POST",
                     dataType: 'json',
                     contentType: 'application/json',
@@ -55,7 +55,7 @@
                         console.log(response);
                         if(response.id==1){
                             alert("register successfully!");
-                            window.location.href = "http://localhost:8080/login";
+                            window.location.href = serve_port+"/login";
                         }
                         else{
                             alert("repeated username!");

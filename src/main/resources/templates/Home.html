@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="utf-8">
     <title>Home</title>
+    <script src="./JS/globalVariable.js"></script>
     <link rel="stylesheet" href="css/home.css">
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js" ></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
@@ -13,6 +14,7 @@
             crossorigin=""></script>
 
     <script src="./JS/PruneCluster/dist/PruneCluster.js"></script>
+
 
     <link rel="stylesheet" href="./JS/PruneCluster/examples/examples.css"/>
 
@@ -29,27 +31,14 @@
           <li class="ali"><a href="homepage" id="homepage">Home</a></li>
           <li class="ali"><a href="area" id="area">Area Details</a></li>
           <li class="ali"><a href="more" id="more">Contact Us</a></li>
+            <li class="ali"><a href="help" id="helppage">Help</a></li>
           <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
           <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
               <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
+              <button th:if="${user!=null}" onclick="logout()" id="logout">log out</button>
           </li>
         </ul>
-        <script>
-            function checkLoginStatus(element,target){
-                var route=document.getElementById(element);
-                route.addEventListener("click",function (event){
-                    // event.preventDefault();
-                    if(sessionStorage.getItem("id")!=null){
-                        route.href=target+"?id="+sessionStorage.getItem("id");
-                    }
-                    console.log(route.href);
-                })
-            }
-            checkLoginStatus("homepage","/homepage-login");
-            checkLoginStatus("area","/area");
-            checkLoginStatus("more","/more");
-            checkLoginStatus("pi","/pi");
-        </script>
+        <script src="./JS/user-manage.js"></script>
     </header>
 
     <!-- 地图容器，包含左侧筛选区域，右侧地图区域，和浮在上方的搜索框-->
@@ -78,12 +67,12 @@
                 <h4>Area Type</h4>
                 <div class="checkboxList">
                     <label><input type="checkbox" value="A" id="city" onclick="fiterCity()"> City </label>
-                    <label><input type="checkbox" value="B" id="suburb" onclick="fiterSuburb()"> Surburb</label>
+                    <label><input type="checkbox" value="B" id="suburb" onclick="fiterSuburb()"> Suburb</label>
                 </div>
             </div>
             
         </div>
-        <div id="map" style="width: 100%; height: 95%;z-index: 1"></div>
+        <div id="map" style="width: 100%; height: 95%;z-index: 1" ></div>
         <script src="./JS/lealeft.js" type="text/javascript" charset="utf-8"></script>
 <!--         搜索框-->
         <div id="searchBox">

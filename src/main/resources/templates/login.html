@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <script src="./JS/globalVariable.js"></script>
     <link rel="stylesheet" href="css/login.css">
     <link rel="icon" type="image/png" href="pictures/login.svg" />
     <link rel="shortcut icon" type="image/png" href="pics/login.svg" />
@@ -12,7 +13,7 @@
     <script src="./JS/user-manage.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-    <div id="popupContainer" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);z-index: 999;display:none">
+    <div id="popup" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);z-index: 999;display:none">
         <div style="background-color: #fff;width: 300px;padding: 20px;border-radius: 20px;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);">
             <p>Login Successful!</p>
             <button onclick="userLogin()">Go to home page</button>
@@ -25,10 +26,6 @@
             </script>
         </div>
     </div>
-
-
-
-
     <div class="content">
         <form class="login-box">
             <div class="btn-container">
@@ -50,8 +47,5 @@
             <button class="login-btn" onclick="login()">Login</button>
         </form>
     </div>
-
-
-
 </body>
 </html>

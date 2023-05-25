@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Area Details</title>
+    <script src="./JS/globalVariable.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js" ></script>
 
@@ -33,27 +34,14 @@
             <li class="ali"><a href="homepage" id="homepage">Home</a></li>
             <li class="ali"><a href="area" id="area">Area Details</a></li>
             <li class="ali"><a href="more" id="more">Contact Us</a></li>
+            <li class="ali"><a href="help" id="helppage">Help</a></li>
             <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
             <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
                 <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
+                <button th:if="${user!=null}" onclick="logout()" id="logout">log out</button>
             </li>
         </ul>
-        <script>
-            function checkLoginStatus(element,target){
-                var route=document.getElementById(element);
-                route.addEventListener("click",function (event){
-                    // event.preventDefault();
-                    if(sessionStorage.getItem("id")!=null){
-                        route.href=target+"?id="+sessionStorage.getItem("id");
-                    }
-                    console.log(route.href);
-                })
-            }
-            checkLoginStatus("homepage","/homepage-login");
-            checkLoginStatus("area","/area");
-            checkLoginStatus("more","/more");
-            checkLoginStatus("pi","/pi");
-        </script>
+        <script src="./JS/user-manage.js"></script>
     </header>
     <div>
         <h1 id="Gallery">Area Details</h1>
@@ -200,7 +188,7 @@
                     console.log(uid);
                     var sendMess={"content":content,"uid":uid,"zid":zid};
                     $.ajax({
-                        url : "http://localhost:8080/addComment",
+                        url : serve_port+"/addComment",
                         type : "POST",
                         dataType: 'json',
                         contentType: 'application/json',

@@ -6,7 +6,7 @@ var map = L.map('map',{zoomControl: false}).setView([-40, 175], 5.5);
 function getPlaceType(type){
     var placeLayer={};
     $.ajax({
-        url : "http://localhost:8080/selectPointType/"+type.toString(),
+        url :  serve_port+"/selectPointType/"+type.toString(),
         type : "get",
         async : false,
         success : function(data) {
@@ -73,7 +73,7 @@ function fiterSuburb(){
 function getDepLayer(){
     var depLayer={};
     $.ajax({
-        url : "http://localhost:8080/getZone",
+        url : serve_port+"/getZone",
         type : "get",
         async : false,//此处需要注意的是要想获取ajax返回的值这个async属性必须设置成同步的，否则获取不到返回值
         success : function(data) {
@@ -117,11 +117,11 @@ depLayer.on('click',function (e) {
     const authorityName=property.ta2020name;
     var targetlink="";
     if(sessionStorage.getItem("id")==null){
-        targetlink="http://localhost:8080/area?zid="+id;
+        targetlink= serve_port+"/area?zid="+id;
     }
     else{
         console.log("fasdfasdfasdfasdfasdfasdf");
-        targetlink="http://localhost:8080/area?id="+sessionStorage.getItem("id")+"&zid="+id;
+        targetlink= serve_port+"/area?id="+sessionStorage.getItem("id")+"&zid="+id;
     }
     L.popup().setLatLng(e.latlng).setContent(
         districtName+"</br><a href=\""+targetlink+"\">see more detail</a>"
@@ -171,7 +171,7 @@ var recomIcon=L.icon({
 function getRecomLayer(combineCode){
     var recomLayerData={}
     $.ajax({
-        url : "http://localhost:8080/getRecommendZones?combineCode="+combineCode,
+        url :  serve_port+"/getRecommendZones?combineCode="+combineCode,
         type : "get",
         async : false,
         success : function(data) {

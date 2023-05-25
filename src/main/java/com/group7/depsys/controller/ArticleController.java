@@ -1,14 +1,11 @@
 package com.group7.depsys.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.extension.api.R;
 import com.group7.depsys.entity.Comment;
 import com.group7.depsys.entity.Feedback;
 import com.group7.depsys.entity.Result;
-import com.group7.depsys.entity.Zone;
 import com.group7.depsys.mapper.CommentMapper;
 import com.group7.depsys.mapper.FeedbackMapper;
-import com.group7.depsys.mapper.ZoneMapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -57,13 +54,4 @@ public class ArticleController {
         queryWrapper.eq("zid",zid);
         return commentMapper.selectList(queryWrapper);
     }
-//
-//
-//
-//    @Autowired
-//    private ZoneMapper zoneMapper;
-//    @GetMapping("/jqjq")
-//    public Zone tttt(){
-//        return zoneMapper.getName(100001);
-//    }
 }

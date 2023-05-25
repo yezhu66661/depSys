@@ -1,0 +1,144 @@
+<!DOCTYPE html >
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Home</title>
+    <script src="./JS/globalVariable.js"></script>
+    <link rel="stylesheet" href="./css/help.css">
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <ul id="head">
+          <li class="bli">
+            <a href="home">
+              <img src="pics/logo.png" class="logo" alt="logo"></img>
+            </a>
+          </li>
+            <li class="ali"><a href="homepage" id="homepage">Home</a></li>
+            <li class="ali"><a href="area" id="area">Area Details</a></li>
+            <li class="ali"><a href="more" id="more">Contact Us</a></li>
+            <li class="ali"><a href="help" id="helppage">Help</a></li>
+            <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
+            <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
+                <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
+                <button th:if="${user!=null}" onclick="logout()" id="logout">log out</button>
+            </li>
+        </ul>
+        <script src="./JS/user-manage.js"></script>
+    </header>
+
+    <div id="help">
+        <div class="pages">
+            <h2>Home Page</h2>
+            <div class="pics">               
+                <img src="pics/help/1.png">
+                <img src="pics/help/2.png" >
+                <img src="pics/help/2.1.png">
+                <img src="pics/help/3.png">
+                <img src="pics/help/4.1.png">
+                <img src="pics/help/4.2.png">
+                <img src="pics/help/5.png">
+            </div>
+            <p>Figure (1) Initial condition: the three checkbox lists on the left do not have any ✔ and the map is a map of New Zealand <br>
+                Figure (2): ✔ 'Depration Condition', the map shows a heat map, the darker the colour the higher the overall ranking of the area, i.e. the more recommended <br>
+                Figure (2.1): On the heat map, you can click on an area on the map, a box will pop up, showing the name of the area and 'see more detail', click on 'see more detail' to jump to 'Area Details' webpage to view the details of the area <br>
+                Figure (3): ✔ Any one or more of the indexes in 'Index of Multiple Deprivation', click on the submit button and a small icon will be displayed on the map for certain areas, which means the area is in the Top 10 and recommended to the user <br>
+                Figure (4.1) and Figure (4.2): ✔ For 'City' or 'Suburb' in 'Area Type', a small icon for that area type will be displayed on the map respectively <br>
+                Figure (5): ✔ All three checkboxList, the changes to the map above will be superimposed.</p>    
+        </div>
+        <div class="pages">
+            <h2>Area Details Page</h2>
+            <div class="pics">
+                <img src="pics/help/Area1.png">
+                <img src="pics/help/Area2.png">
+            </div>
+            <p>The left side shows the exact location on the map and the right side is a Line chart with seven deprivation indicators. <br>
+                To add a comment and view the comments below, enter a comment in the input box under 'Add your comment' (e.g. The place is good) and click on the submit Reviews button and the comment will appear in Comments.</p>
+        </div>
+        <div class="pages">
+            <h2>Contact Us Page</h2>
+            <div class="pics">
+                <img src="pics/help/Contact.png">
+            </div>
+            <p>Enter the feedback in the text box and click the Send Now button to submit the feedback to the site's database and the back-end staff will receive the comment</p>
+        </div>
+        <div class="pages">
+            <h2>Others</h2>
+            <p>
+                Other pages (including personal information, login and sign up are very simple, so there is no specific guidance) <br>
+                One thing to note is that if the user is not logged in, clicking on personal information will take you to the login page
+            </p>
+
+        </div>
+    </div>
+
+    
+    <footer>
+        <div class="n1">
+            <div class="n2">
+            <dl>
+                <dt class="n3">KNOW US</dt>
+                <dd></dd>
+                <dt ><a href="#" class="n5">Introduction</a></dt>
+                <dd></dd>
+                <dt><a href="#" class="n5">Contact Us</a></dt>
+                <dd></dd>
+                <dt>E-mail: <a href="group7@gmail.com"  class="n5">group7@gmail.com</a></dt>
+                <dd></dd>
+                <dt>Tel: <a href="+64 0123456789"  class="n5">+64 0123456789</a></dt>
+                <dd></dd>
+            </dl>
+            </div>
+            <div class="n2">
+            <dl>
+                <dt class="n3">Services</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Our Companies</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Corporate Recruitment</a></dt>
+                <dd></dd>
+            </dl>
+            </div>
+            <div class="n2">
+            <dl>
+                <dt class="n3">Material Submission</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Submission channels</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Submission Instructions</a></dt>
+                <dd></dd>
+            </dl>
+            </div>
+            <div class="n2">
+            <dl>
+                <dt class="n3">Find housing</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Smart Recommendations</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Manual search</a></dt>
+                <dd></dd>
+                <dt>
+                <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html">
+                    <img style="border:0;width:88px;height:31px"
+                        src="pics/vhtml.gif"
+                        alt="Valid HTML!" />
+                </a>
+            </dt>
+            <dd></dd>
+            <dt>
+                <a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=zh-cn">
+                    <img style="border:0;width:88px;height:31px"
+                        src="pics/vcss.gif"
+                        alt="Valid CSS!" />
+                </a>
+            </dt>
+            <dd></dd>
+            </dl>
+            </div>
+            <div class="n4">
+            <p> Copyright © 2023-2024 All rights reserved Group7 </p>
+            </div>
+        </div>
+        </footer>
+</body>
+</html>

@@ -6,7 +6,7 @@ attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStree
 function getLayer(zid){
     var recomLayerData={}
     $.ajax({
-        url : "http://localhost:8080/getZoneBound?zid="+zid.toString(),
+        url : serve_port+"/getZoneBound?zid="+zid.toString(),
         type : "get",
         async : false,
         success : function(data) {

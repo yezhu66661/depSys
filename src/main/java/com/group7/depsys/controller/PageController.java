@@ -8,7 +8,6 @@ import com.group7.depsys.entity.User;
 import com.group7.depsys.mapper.CommentMapper;
 import com.group7.depsys.mapper.UserMapper;
 import com.group7.depsys.mapper.ZoneMapper;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -136,7 +135,6 @@ public class PageController {
             List<Comment> comments=commentMapper.selectCommentsByUser(id);
             for (Comment comment:
                     comments) {
-                System.err.println(zoneMapper.getName(comment.getZid()).getGed2020nam());
                 comment.setZoneName(zoneMapper.getName(comment.getZid()).getGed2020nam());
             }
             model.addAttribute("comment",comments);
@@ -145,6 +143,21 @@ public class PageController {
             model.addAttribute("user",null);
         }
         return "pi";
+    }
+
+
+    @RequestMapping("/help")
+    public String helpPage(Model model,@RequestParam(name="id",defaultValue = "-1") int id){
+        if(id>0) {
+            QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+            queryWrapper.eq("id",id);
+            User user=userMapper.selectOne(queryWrapper);
+            model.addAttribute("user",user);
+        }
+        else{
+            model.addAttribute("user",null);
+        }
+        return "help";
     }
 
 }
