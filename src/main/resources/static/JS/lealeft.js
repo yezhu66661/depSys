@@ -46,8 +46,6 @@ suburbLayer.ProcessView();
 
 
 var control=L.layerGroup().addTo(map);
-
-
 function fiterCity(){
     var flag=document.getElementById("city").checked;
     if(flag){
@@ -56,7 +54,6 @@ function fiterCity(){
     else{
         control.removeLayer(cityLayer);
     }
-    // cityLayerFlag=!cityLayerFlag;
 }
 function fiterSuburb(){
     var flag=document.getElementById("suburb").checked;
@@ -120,7 +117,6 @@ depLayer.on('click',function (e) {
         targetlink= serve_port+"/area?zid="+id;
     }
     else{
-        console.log("fasdfasdfasdfasdfasdfasdf");
         targetlink= serve_port+"/area?id="+sessionStorage.getItem("id")+"&zid="+id;
     }
     L.popup().setLatLng(e.latlng).setContent(

@@ -21,7 +21,6 @@ public class PlacePointController {
 
     @GetMapping("/selectPointType/{type}")
     public String getPlaces(@PathVariable("type") String type){
-
         return placePointMapper.selectAllPlaces(type).getJsonBuildObject();
     }
 

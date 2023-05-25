@@ -78,7 +78,6 @@ public class ZoneController {
             int healtIndex=Integer.parseInt(String.valueOf(combineCode.charAt(4)));
             int educaIndex=Integer.parseInt(String.valueOf(combineCode.charAt(5)));
             int accessIndex=Integer.parseInt(String.valueOf(combineCode.charAt(6)));
-
             zones.sort(new Comparator<Zone>() {
                 @Override
                 public int compare(Zone o1, Zone o2) {
