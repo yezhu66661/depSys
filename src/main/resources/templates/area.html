@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Details</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js" ></script>
+
+    <link rel="stylesheet" href="css/area.css">
+    <link rel="icon" type="image/png" href="pics/area.svg" />
+    <link rel="shortcut icon" type="image/png" href="pics/area.svg" />
+    <img id="bg" src="pics/more.jpg" alt="beach">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js" ></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+
+</head>
+<body>
+<div class="content">
+    <header>
+        <ul id="head" style="z-index: 999">
+            <li class="bli">
+                <a href="homepage">
+                    <img src="pics/logo.png" class="logo" alt="logo"></img>
+                </a>
+            </li>
+            <li class="ali"><a href="homepage" id="homepage">Home</a></li>
+            <li class="ali"><a href="area" id="area">Area Details</a></li>
+            <li class="ali"><a href="more" id="more">Contact Us</a></li>
+            <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
+            <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
+                <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
+            </li>
+        </ul>
+        <script>
+            function checkLoginStatus(element,target){
+                var route=document.getElementById(element);
+                route.addEventListener("click",function (event){
+                    // event.preventDefault();
+                    if(sessionStorage.getItem("id")!=null){
+                        route.href=target+"?id="+sessionStorage.getItem("id");
+                    }
+                    console.log(route.href);
+                })
+            }
+            checkLoginStatus("homepage","/homepage-login");
+            checkLoginStatus("area","/area");
+            checkLoginStatus("more","/more");
+            checkLoginStatus("pi","/pi");
+        </script>
+    </header>
+    <div>
+        <h1 id="Gallery">Area Details</h1>
+    </div>
+
+    <div class="whole">
+        <div class="upper-section">
+            <div class="map">
+                <div id="map" style="width: 100%; height: 100%;z-index: 1"></div>
+                <script src="./JS/area.js" type="text/javascript" charset="utf-8"></script>
+                <script th:inline="javascript">
+                    var id='[[${zid}]]'
+                    var layer=getLayer(id);
+                    L.geoJSON(layer.features[0]).addTo(map);
+                    map.fitBounds(L.geoJSON(layer.features[0]).getBounds());
+                </script>
+            </div>
+
+
+            <div class="search">
+                <h2 class="heading2">Area Index Rank</h2>
+                <h3>The following line chart shows how the seven elements of the region rank nationally for reference:</h3>
+                <div id="lineChartContainer" style="height: 400px"></div>
+
+                <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+
+                <script type="text/javascript" th:inline="javascript">
+                    var dom = document.getElementById('lineChartContainer');
+                    var myChart = echarts.init(dom, null, {
+                        renderer: 'canvas',
+                        useDirtyRect: false
+                    });
+                    var zoneData='[[${zoneData}]]';
+                    var zoneDataList=zoneData.replace('[','');
+                    zoneDataList=zoneDataList.replace(']','');
+                    zoneDataList=zoneDataList.replace('\"','');
+                    zoneDataList=zoneDataList.split(',');
+                    for(var i=0;i<zoneDataList.length;i++){
+                        console.log(zoneDataList[i])
+                        zoneDataList[i]=100-parseInt(zoneDataList[i])/6181*100;
+                    }
+                    console.log(zoneDataList)
+                    var app = {};
+                    var option;
+
+                    option = {
+                        xAxis: {
+                            type: 'category',
+                            data: ['Employment', 'Income', 'Crime', 'Housing', 'Health', 'Education', 'Access']
+                        },
+                        yAxis: {
+                            type: 'value'
+                        },
+                        series: [
+                            {
+                                // 在这引入数据库的数据 替换下面的data
+                                data: zoneDataList,
+                                type: 'line'
+                            }
+                        ]
+                    };
+
+                    if (option && typeof option === 'object') {
+                        myChart.setOption(option);
+                    }
+
+                    window.addEventListener('resize', myChart.resize);
+                </script>
+
+            </div>
+        </div>
+        <div class="reviews">
+            <h2 class="heading2">User Comments</h2>
+            <h3 class="heading3">Comments:</h3>
+
+
+            <!-- 以下为获取评论 -->
+            <div id="comments-container"></div>
+            <script type="text/javascript" th:inline="javascript">
+
+                // 将评论数据显示在网页上
+                function displayComments() {
+                    var comments='[[${comment}]]';
+                    comments=JSON.parse(comments);
+                    console.log(comments);
+                    var container = document.getElementById("comments-container");
+                    container.innerHTML = "";
+
+                    comments.forEach(function(comment) {
+                        var commentElem = document.createElement("div");
+                        commentElem.classList.add("comment");
+
+                        // var avatarElem = document.createElement("img");
+                        // avatarElem.classList.add("avatar");
+                        // avatarElem.src = comment.avatarUrl;
+                        // commentElem.appendChild(avatarElem);
+
+                        var usernameElem = document.createElement("div");
+                        usernameElem.classList.add("username");
+                        usernameElem.textContent = comment.name;
+                        commentElem.appendChild(usernameElem);
+
+
+                        var date=new Date(comment.submittime);
+                        var month=date.getMonth()+1;
+                        var dateString=date.getFullYear().toString()+" "+month.toString()+"/"+date.getDate().toString();
+                        var timeElem = document.createElement("div");
+                        timeElem.classList.add("time");
+                        timeElem.textContent = dateString;
+                        commentElem.appendChild(timeElem);
+
+                        var contentElem = document.createElement("div");
+                        contentElem.classList.add("content");
+                        contentElem.textContent = comment.content;
+                        commentElem.appendChild(contentElem);
+
+                        container.appendChild(commentElem);
+                    });
+                }
+                displayComments();
+
+            </script>
+            <!-- 以上为获取评论 -->
+
+            <script th:inline="javascript">
+                function submit2(){
+                    // if(sessionStorage.getItem("id")==null){
+                    //     alert("please log in first!")
+                    //     return;
+                    // }
+
+                    var content=document.getElementById("content").value;
+                    var user='[[${user}]]';
+                    if(user=='null'){
+                        alert("please log in first!");
+                        return;
+                    }
+                    console.log("asdfffffffffffffffffffffffffffffffffffffff")
+                    var uid=JSON.parse(user).id;
+
+
+                    var zid='[[${zid}]]';
+                    zid=parseInt(zid);
+                    console.log(uid);
+                    var sendMess={"content":content,"uid":uid,"zid":zid};
+                    $.ajax({
+                        url : "http://localhost:8080/addComment",
+                        type : "POST",
+                        dataType: 'json',
+                        contentType: 'application/json',
+                        data: JSON.stringify(sendMess),
+                        async : false,
+                        success : function(response) {
+                            // var res=JSON.parse(response);
+                            // console.log(res);
+                            console.log(response);
+                            if(response.status=="succ"){
+                                alert("submit comment successfully!");
+                                document.getElementById("content").value="";
+                            }
+                        }});
+                }
+            </script>
+
+
+            <div class="add-comment">
+                <h3 class="ayn">Add your comment</h3>
+                <div id="comment-form">
+                    <textarea id="content" required></textarea><br>
+                    <input type="submit" value="Submit Reviews" class="submit-button" onclick="submit2()">
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<footer>
+    <div class="n1">
+        <div class="n2">
+            <dl>
+                <dt class="n3">KNOW US</dt>
+                <dd></dd>
+                <dt ><a href="#" class="n5">Introduction</a></dt>
+                <dd></dd>
+                <dt><a href="#" class="n5">Contact Us</a></dt>
+                <dd></dd>
+                <dt>E-mail: <a href="group7@gmail.com"  class="n5">group7@gmail.com</a></dt>
+                <dd></dd>
+                <dt>Tel: <a href="+64 0123456789"  class="n5">+64 0123456789</a></dt>
+                <dd></dd>
+            </dl>
+        </div>
+        <div class="n2">
+            <dl>
+                <dt class="n3">Services</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Our Companies</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Corporate Recruitment</a></dt>
+                <dd></dd>
+            </dl>
+        </div>
+        <div class="n2">
+            <dl>
+                <dt class="n3">Material Submission</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Submission channels</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Submission Instructions</a></dt>
+                <dd></dd>
+            </dl>
+        </div>
+        <div class="n2">
+            <dl>
+                <dt class="n3">Find housing</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Smart Recommendations</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Manual search</a></dt>
+                <dd></dd>
+                <dt>
+                    <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html">
+                        <img style="border:0;width:88px;height:31px"
+                             src="pics/vhtml.gif"
+                             alt="Valid HTML!" />
+                    </a>
+                </dt>
+                <dd></dd>
+                <dt>
+                    <a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=zh-cn">
+                        <img style="border:0;width:88px;height:31px"
+                             src="pics/vcss.gif"
+                             alt="Valid CSS!" />
+                    </a>
+                </dt>
+                <dd></dd>
+            </dl>
+        </div>
+        <div class="n4">
+            <p> Copyright © 2023-2024 All rights reserved Group7 </p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

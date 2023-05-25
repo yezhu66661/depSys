@@ -1,0 +1,340 @@
+*{  
+    margin: 0px;  
+    padding: 0px;  
+  } 
+
+#bg{
+    width: 100%;
+    top: 0px;
+    left: 0px;
+    left: 0px;
+    position:absolute;
+    z-index: -9999;
+}
+div>a{
+    display: inline-block;
+    background-image: -webkit-gradient(linear, 0 0, 0 bottom, from(rgb(255, 255, 255)), to(rgb(126, 125, 125)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 500%;
+    line-height: 100px;
+    color: rgb(255, 255, 255, 0.9);
+    text-decoration: none;
+    position: absolute;
+    line-height: 100%;
+    top:2%
+}
+
+/* nav */
+.logo{
+  width: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor: pointer; 
+}
+.logo:hover {
+  transform: scale(1.1); 
+}
+
+.logo:active {
+  opacity: 0.8;
+}
+
+.logo {
+  transition: transform 0.3s ease-in-out;
+}
+
+#head{
+  box-shadow:0px 0px 10px #505050;
+  height: 90px;
+}
+#head{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  list-style-type: none;
+  overflow: hidden;
+  background-color: rgba(235, 235, 235, 0.616);
+} 
+.ali{
+  float: left;
+  width: 10%;
+}  
+.ali a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 170%;
+  color: rgb(0, 0, 0);
+}  
+.ali a:hover{
+  background-color: rgba(51, 123, 182, 0.74);
+}
+.ali a:visited{
+  color: black;
+}
+.bli{
+  float: left;
+  width: 8%;
+  display: block;
+}  
+.cli{
+  width: 10%;
+  float: right;
+}
+#login{
+  width: 23%;
+  filter: invert(90%);
+  float: right;
+  margin-right: 70px;
+  margin-top: 9px;
+  filter: invert(0.15);
+}
+#login:hover{
+  box-shadow:0px 5px 5px 5px grey;
+}
+
+/* nav */
+  
+/*main*/
+
+    /*User profile*/
+    .user-profile {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+      
+      .profile-pic {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 40px;
+        border: 1px solid white;
+      }
+      
+      .profile-pic img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        
+      }
+      
+      .profile-info {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        width: 400px;
+        height: 200px;
+        padding: 20px;
+        background-color: rgb(125, 102, 71, 0.747);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        border: 1px solid white;
+      }
+      
+      .user-name {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color:black;
+      }
+      
+      .user-email {
+        font-size: 16px;
+        margin-bottom: 5px;
+        text-align: center;
+      }
+      
+      .user-address {
+        font-size: 16px;
+        margin-bottom: 5px;
+        text-align: center;
+      }
+
+      .btn-change-password {
+        margin-top: 70px;
+        padding: 10px 20px;
+        background-color: #000000;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .btn-change-password:hover {
+        background-color: #0062cc;
+      }
+    /*User profile*/
+
+.hr{
+      margin-top: 10px;
+      color: rgb(128, 128, 128);
+      width: 70%;
+}
+.box {
+      border-radius: 5px;
+      border: 1px solid black;
+      padding: 0;
+      margin-top: 5px;
+      width: 65%;
+      height: 200px;
+      background-color: rgb(125, 102, 71, 0.747);
+}
+#Ourblog{
+  text-align: center;
+  margin-top: 10%;
+  font-size: 350%;
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(235, 235, 235, 0.616);
+  box-shadow:0px 0px 10px #000;
+  font-weight:300px;
+  color: rgba(31, 31, 31, 0.795);
+  text-shadow: 0px 0px 2px #4d4d4d;
+}
+
+
+#main{
+    background:rgb(47, 79, 79);
+    background-color: #c5b8a5e0;
+    box-shadow:0px 0px 10px #000;
+}
+.pic{
+    width: 35%;
+    margin-left: 20%;
+    margin-top: 5%;
+    box-shadow:0px 0px 15px #000;
+}
+#recenthr{
+  list-style: none;
+}
+.comment{
+    width: 30%;
+    margin-left: 20%;
+    color: rgba(237, 208, 82, 0.87);
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.2em;
+    padding-top: 1%;
+    padding-bottom: 1%;
+}
+.break{
+    color: rgb(255, 255, 255);
+}
+
+
+
+/*main*/
+
+/*nav*/
+#nav{
+    width: 40%;
+    float: right;
+    margin-top: 5%;
+}
+.headnav{
+  color: black;
+  list-style-type: none;
+  font-size: 2em;
+  font-weight: bold;
+}
+.headnav1{
+  color: rgba(255, 255, 255, 0.897);
+  list-style-type: none;
+  font-size: 2em;
+  margin-top: 10%;
+}
+.date{
+  color: rgba(255, 255, 255, 0.89);
+  line-height: 2.5em;
+}
+.date:hover{
+    color: gray;
+    transition: all 0.5s;
+    cursor:pointer;
+}
+.post{
+  width: 15%;
+}
+.namepost{
+  color: rgba(255, 255, 255, 0.89);
+  line-height: 2em;
+  list-style: none;
+}
+/*nav*/
+
+
+/*footer*/
+.n2{
+  width:25%;
+  height:170px;
+  background-color:#181818;
+  color:#ffffff;
+  float:left;
+}
+.n3{
+  margin:15px;
+  font-weight:bold;
+}
+.n4{
+  width:100%;
+  clear:both;
+  background-color:#000000;
+  color:#ffffff;
+  height:2em;
+  text-align:center;
+
+}
+dt{
+  text-align: center;
+}
+a{
+  text-decoration: none;
+}
+.ali a{
+  color: #000;
+}
+.n5{
+  color: #fff;
+}
+a:visited{
+  color: white;
+}
+a:hover{
+  color: rgb(30, 102, 210);
+}
+a:active{
+  color: white;
+}
+/*footer*/
+
+#comments-container{
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    overflow-y: scroll;
+}
+
+.username {
+    font-weight: bold;
+}
+.time {
+    color: black;
+    font-size: 12px;
+}
+.content {
+    clear: both;
+}
+

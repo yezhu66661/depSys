@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group7.depsys.mapper.CommentMapper">
+    <select id="selectComments" resultType="com.group7.depsys.entity.Comment">
+        select * from comment as a left join user as b on a.uid=b.id where zid=#{zid};
+    </select>
+
+
+
+    <select id="selectCommentsByUser" resultType="com.group7.depsys.entity.Comment">
+        select * from comment where uid=#{uid};
+    </select>
+</mapper>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- 检查用户是否已经登录-->
+<!-- <script src="check-login.js"></script> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Information</title>
+    <link rel="stylesheet" href="css/pi.css">
+    <link rel="icon" type="image/png" href="pics/info.svg" />
+    <link rel="shortcut icon" type="image/png" href="pics/info.svg" />
+
+</head>
+<body>
+    <img id="bg" src="pics/info.jpg" alt="bgabout">
+    <header>
+        <ul id="head">
+            <li class="bli">
+                <a href="homepage">
+                    <img src="pics/logo.png" class="logo" alt="logo"></img>
+                </a>
+            </li>
+            <li class="ali"><a href="homepage" id="homepage">Home</a></li>
+            <li class="ali"><a href="area" id="area">Area Details</a></li>
+            <li class="ali"><a href="more" id="more">Contact Us</a></li>
+            <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
+            <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
+                <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
+            </li>
+        </ul>
+        <script>
+            function checkLoginStatus(element,target){
+                var route=document.getElementById(element);
+                route.addEventListener("click",function (event){
+                    // event.preventDefault();
+                    if(sessionStorage.getItem("id")!=null){
+                        route.href=target+"?id="+sessionStorage.getItem("id");
+                    }
+                    console.log(route.href);
+                })
+            }
+            checkLoginStatus("homepage","/homepage-login");
+            checkLoginStatus("area","/area");
+            checkLoginStatus("more","/more");
+            checkLoginStatus("pi","/pi");
+        </script>
+    </header>
+    <div>
+        <h1 id="Ourblog">
+            <span id="our">Personal</span>
+            <span id="blog">Information</span>
+        </h1>
+    </div>
+
+    <div id="main">
+        <div id="blog1">
+            <div id="nav">
+                <div id="recent">
+                    <p class="headnav">Your Comments</p>
+                    <hr class="hr">  
+                    <div class="box">
+                        <div id="comments-container"></div>
+                      <!-- 添加用户自己的评论 -->
+                        <script type="text/javascript" th:inline="javascript">
+
+                            // 将评论数据显示在网页上
+                            function displayComments() {
+                                var comments='[[${comment}]]';
+                                comments=JSON.parse(comments);
+                                console.log(comments);
+                                var container = document.getElementById("comments-container");
+                                container.innerHTML = "";
+                                if(comments=="null") {
+                                    comments=[];
+                                }
+                                comments.forEach(function(comment) {
+                                    var commentElem = document.createElement("div");
+                                    // commentElem.classList.add("comment");
+
+                                    // var avatarElem = document.createElement("img");
+                                    // avatarElem.classList.add("avatar");
+                                    // avatarElem.src = comment.avatarUrl;
+                                    // commentElem.appendChild(avatarElem);
+
+                                    var usernameElem = document.createElement("div");
+                                    usernameElem.classList.add("username");
+                                    usernameElem.textContent = comment.zoneName;
+                                    commentElem.appendChild(usernameElem);
+
+
+                                    var date=new Date(comment.submittime);
+                                    var month=date.getMonth()+1;
+                                    var dateString=date.getFullYear().toString()+" "+month.toString()+"/"+date.getDate().toString();
+                                    var timeElem = document.createElement("div");
+                                    timeElem.classList.add("time");
+                                    timeElem.textContent = dateString;
+                                    commentElem.appendChild(timeElem);
+
+                                    var contentElem = document.createElement("div");
+                                    contentElem.classList.add("content");
+                                    contentElem.textContent = comment.content;
+                                    commentElem.appendChild(contentElem);
+
+                                    container.appendChild(commentElem);
+                                });
+                            }
+                            displayComments();
+
+                        </script>
+                    </div>
+                </div>
+            </div>
+            <div class="user-profile">
+                <div class="user-profile">
+                    <div class="profile-pic">
+                      <!-- 此处改为用户个人内容 -->
+                      <img src="pics/head.jpg" alt="User Avatar">
+                    </div>
+                    <div class="profile-info">
+                      <h2 class="user-name" th:text="${user.name}"></h2>
+                      <p class="user-email" th:text="${user.email}"></p>
+                      <!-- 此处改为用户个人内容 -->
+<!--                      <button class="btn-change-password" id="myButton">Manage your information</button>-->
+                      <script>
+                        document.getElementById("myButton").addEventListener("click", function() {
+                          window.location.href = "manage.html";
+                        });
+                      </script>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="n1">
+          <div class="n2">
+            <dl>
+              <dt class="n3">KNOW US</dt>
+              <dd></dd>
+              <dt ><a href="#" class="n5">Introduction</a></dt>
+              <dd></dd>
+              <dt><a href="#" class="n5">Contact Us</a></dt>
+              <dd></dd>
+              <dt>E-mail: <a href="group7@gmail.com"  class="n5">group7@gmail.com</a></dt>
+              <dd></dd>
+              <dt>Tel: <a href="+64 0123456789"  class="n5">+64 0123456789</a></dt>
+              <dd></dd>
+            </dl>
+          </div>
+          <div class="n2">
+            <dl>
+              <dt class="n3">Services</dt>
+              <dd></dd>
+              <dt><a href="#"  class="n5">Our Companies</a></dt>
+              <dd></dd>
+              <dt><a href="#"  class="n5">Corporate Recruitment</a></dt>
+              <dd></dd>
+            </dl>
+          </div>
+          <div class="n2">
+            <dl>
+              <dt class="n3">Material Submission</dt>
+              <dd></dd>
+              <dt><a href="#"  class="n5">Submission channels</a></dt>
+              <dd></dd>
+              <dt><a href="#"  class="n5">Submission Instructions</a></dt>
+              <dd></dd>
+            </dl>
+          </div>
+          <div class="n2">
+            <dl>
+              <dt class="n3">Find housing</dt>
+              <dd></dd>
+              <dt><a href="#"  class="n5">Smart Recommendations</a></dt>
+              <dd></dd>
+              <dt><a href="#"  class="n5">Manual search</a></dt>
+              <dd></dd>
+              <dt>
+                <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html">
+                  <img style="border:0;width:88px;height:31px"
+                      src="pics/vhtml.gif"
+                      alt="Valid HTML!" />
+              </a>
+            </dt>
+            <dd></dd>
+            <dt>
+              <a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=zh-cn">
+                    <img style="border:0;width:88px;height:31px"
+                        src="pics/vcss.gif"
+                        alt="Valid CSS!" />
+                </a>
+            </dt>
+            <dd></dd>
+            </dl>
+          </div>
+          <div class="n4">
+            <p> Copyright © 2023-2024 All rights reserved Group7 </p>
+          </div>
+        </div>
+      </footer>
+</body>
+</html>

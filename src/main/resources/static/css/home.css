@@ -1,0 +1,263 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+    width: 100%;
+}
+  
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0%;
+    position: relative;
+    top:0%;
+    left: 0%;
+    font-family: Arial, sans-serif;
+}
+  
+/* nav */
+.logo{
+  width: 50%;
+  margin-top: 10px;
+  margin-left: 10px;
+  cursor: pointer; 
+}
+.logo:hover {
+  transform: scale(1.1); 
+}
+
+.logo:active {
+  opacity: 0.8;
+}
+
+.logo {
+  transition: transform 0.3s ease-in-out;
+}
+
+#head{
+  box-shadow:0px 0px 10px #505050;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  list-style-type: none;
+  overflow: hidden;
+  background-color: rgba(235, 235, 235, 0.616);
+  z-index: 9999;
+} 
+.ali{
+  float: left;
+  width: 10%;
+}  
+.ali a {
+  display: block;
+  text-align: center;
+  padding: 14px 16px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-size: 170%;
+  list-style-type: none;
+  color: rgb(0, 0, 0);
+}  
+.ali a:hover{
+  background-color: rgba(51, 123, 182, 0.74);
+}
+.ali a:visited{
+  color: black;
+}
+.bli{
+  float: left;
+  width: 8%;
+  display: block;
+}  
+.cli{
+  width: 10%;
+  float: right;
+}
+#login{
+  width: 23%;
+  filter: invert(90%);
+  float: right;
+  margin-right: 70px;
+  margin-top: 9px;
+  filter: invert(0.15);
+}
+#login:hover{
+  box-shadow:0px 5px 5px 5px grey;
+}
+
+/* 地图容器 */
+#mapContainer {
+    position: relative;
+    margin-top: 7%;
+    width: 100%;
+    height: 90%;
+    display: flex; 
+    flex-wrap: wrap; 
+}
+
+
+ /* 搜索栏 */
+ #searchBox {
+    position: absolute;
+    top: 50px;
+    left: 50%; 
+    transform: translateX(-50%); 
+    display: flex;
+    justify-content: center;
+    width: 500px;
+    height: 50px;
+
+}
+  
+#searchBox input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    outline: none;
+    width: 80%;
+    font-size: large;
+    letter-spacing: 2px;
+}
+  
+#searchBox button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #337ab7;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    width: 20%;
+    font-size: large;
+    letter-spacing: 2px;
+}
+  
+#searchBox button:hover {
+    background-color: #23527c;
+}
+
+/* 左侧筛选区 */
+#left {
+    height: 100%;
+    width: 20%;
+    float: left;
+    padding: 30px;
+    background-image: linear-gradient(to top, #d5d4d0 0%, #d5d4d0 1%, #eeeeec 31%, #efeeec 75%, #e9e9e7 100%);
+    border: 0;
+    border-radius: 15px; /* 设置边框的圆角 */
+
+}
+
+label {
+  margin-bottom: 10px;
+}
+  
+h3 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+h4 {
+  margin-bottom: 10px;
+  margin-top: 10px;
+  line-height: 20px;
+}
+  
+.filterBox {
+    margin-bottom: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+    overflow: auto;
+}
+  
+  .checkboxList {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    
+      
+  }
+  
+  .confirmButton {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    background-color: #337ab7;
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: block;
+    margin: 0 auto;
+  }
+  
+  .confirmButton:hover {
+    background-color: #23527c;
+  }
+  
+/* map */
+#map {
+    height: 100%;
+    width: 80%;
+    float: left;
+}
+
+  
+/*footer*/
+.n1{
+  padding-top: 30px;
+}
+.n2{
+  width:25%;
+  height:170px;
+  background-color:#181818;
+  color:#ffffff;
+  float:left;
+}
+.n3{
+  margin:15px;
+  font-weight:bold;
+}
+.n4{
+  width:100%;
+  clear:both;
+  background-color:#000000;
+  color:#ffffff;
+  height:2em;
+  text-align:center;
+
+}
+dt{
+  text-align: center;
+}
+a{
+  text-decoration: none;
+}
+.ali a{
+  color: #000;
+}
+.n5{
+  color: #fff;
+}
+a:visited{
+  color: white;
+}
+a:hover{
+  color: rgb(30, 102, 210);
+}
+a:active{
+  color: white;
+}
+/*footer*/

@@ -1,0 +1,42 @@
+spring:
+  datasource:
+    dynamic:
+      primary: pgsql
+      datasource:
+        mysql:
+          url: jdbc:mysql://localhost:3306/depmap?useSSL=false
+#          url: jdbc:mysql://localhost:3300/depmap?useSSL=false
+          username: root
+          password: root
+        pgsql:
+          url: jdbc:postgresql://localhost:5432/demo1?useSSL=false
+#          url: jdbc:postgresql://localhost:5432/webGis?useSSL=false
+          username: postgres
+          password: 123
+mybatis:
+  mapper-locations: classpath:resources/mapper/*.xml
+
+# 配置数据源类型
+#    type: com.alibaba.druid.pool.DruidDataSource
+# 配置连接数据库信息
+#    driver-class-name: com.mysql.jdbc.Driver
+#    url: jdbc:mysql://localhost:3306/depsys?useSSL=false
+#    username: root
+#    password: root
+#    driver-class-name: org.postgresql.Driver
+#    url: jdbc:postgresql://localhost:5432/demo1?useSSL=false
+#    username: postgres
+#    password: 123
+#    type: com.zaxxer.hikari.HikariDataSource
+#  jpa:
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        hbm2ddl.auto: create
+
+
+#mybatis-plus:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
+#    map-underscore-to-camel-case: false
+#    # 关闭mybatisplus处理大写字母的功能，否则会将A变为_a，从而无法插入

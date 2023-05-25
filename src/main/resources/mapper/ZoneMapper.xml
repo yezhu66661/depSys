@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.group7.depsys.mapper.ZoneMapper">
+    <select id="selectAllWithIdAndGeo" resultType="com.group7.depsys.entity.Zone">
+        SELECT json_build_object(
+                       'type','FeatureCollection',
+                       'features', json_agg(st_AsGeoJSON(t.*)::json)
+                   ) from
+                         (select a.dz2018,a.ged2020nam,a.ta2020name,a.rank_imd18,ST_Transform(ST_Simplify(a.geom,50),4326)
+                      from public.imd2018 as a) as t;
+    </select>
+
+
+    <select id="selectRecomZone" resultType="com.group7.depsys.entity.Zone">
+        SELECT json_build_object(
+                       'type','FeatureCollection',
+                       'features', json_agg(st_AsGeoJSON(t.*)::json)
+                   ) from (select a.dz2018,ST_Transform(ST_Simplify(a.geom,50),4326) from public.imd2018 as a
+                                                                                     where a.dz2018 in
+        <foreach collection="list" item="item" index="index" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+        ) as t;
+    </select>
+
+    <select id="selectRecommendedZones" resultType="com.group7.depsys.entity.Recommend">
+        select * from recommend where combine_code=#{combineCode};
+
+    </select>
+
+
+    <select id="getName" resultType="com.group7.depsys.entity.Zone">
+        SELECT dz2018,ged2020nam
+        FROM public.imd2018 where dz2018=#{zid};
+
+    </select>
+
+
+
+    <select id="selectAttrs" resultType="com.group7.depsys.entity.Indicator">
+        select a.rank from indicator as a where zid=#{zid};
+    </select>
+
+    <select id="selectIndicators" resultType="com.group7.depsys.entity.Indicator">
+        select * from indicator;
+    </select>
+
+    <select id="selectAll" resultType="com.group7.depsys.entity.Zone">
+
+        SELECT dz2018, rank_emplo, rank_incom, rank_crime, rank_housi, rank_healt, rank_educa, rank_acces FROM public.imd2018;
+
+    </select>
+
+    <insert id="insertOne" parameterType="com.group7.depsys.entity.Recommend">
+        insert into recommend (combine_code , zid) values (#{combineCode},#{zid});
+    </insert>
+    
+    
+    <select id="selectGivenArea" resultType="com.group7.depsys.entity.Zone">
+        SELECT ST_AsGeoJSON(ST_Simplify(a.geom,50))::json
+        FROM public.imd2018 where dz2018=#{zid}
+
+    </select>
+</mapper>

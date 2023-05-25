@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" xmlns:th="http://www.thymeleaf.org">
+    <title>Home</title>
+    <link rel="stylesheet" href="css/home.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js" ></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+          integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+          crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+            integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+            crossorigin=""></script>
+
+    <script src="./JS/PruneCluster/dist/PruneCluster.js"></script>
+
+    <link rel="stylesheet" href="./JS/PruneCluster/examples/examples.css"/>
+
+
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <ul id="head">
+          <li class="bli">
+            <a href="homepage">
+              <img src="pics/logo.png" class="logo" alt="logo"></img>
+            </a>
+          </li>
+          <li class="ali"><a href="homepage" id="homepage">Home</a></li>
+          <li class="ali"><a href="area" id="area">Area Details</a></li>
+          <li class="ali"><a href="more" id="more">Contact Us</a></li>
+          <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
+          <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
+              <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
+          </li>
+        </ul>
+        <script>
+            function checkLoginStatus(element,target){
+                var route=document.getElementById(element);
+                route.addEventListener("click",function (event){
+                    // event.preventDefault();
+                    if(sessionStorage.getItem("id")!=null){
+                        route.href=target+"?id="+sessionStorage.getItem("id");
+                    }
+                    console.log(route.href);
+                })
+            }
+            checkLoginStatus("homepage","/homepage-login");
+            checkLoginStatus("area","/area");
+            checkLoginStatus("more","/more");
+            checkLoginStatus("pi","/pi");
+        </script>
+    </header>
+
+    <!-- 地图容器，包含左侧筛选区域，右侧地图区域，和浮在上方的搜索框-->
+<!--    <div id="mapContainer">-->
+        <!-- 左侧筛选区 -->
+        <div id="left" style="cursor:pointer;position:absolute;z-index: 999; top:100px;height:75%">
+            <h3>Please Check the Index You Want to Know</h3>
+            <div class="filterBox">
+                <h4>Depration Condition</h4>               
+                <label><input type="checkbox" value="show" id="depLayer" onclick="controlDeplayer()"> Show it on the map</label>
+            </div>
+            <div class="filterBox">
+                <h4>Index of Multiple Deprivation</h4>
+                <div class="checkboxList">
+                    <label><input id="Employment" type="checkbox" value="64"> Employment</label>
+                    <label><input id="Income" type="checkbox" value="32"> Income  </label>
+                    <label><input id="Crime" type="checkbox" value="16"> Crime</label>
+                    <label><input id="Housing" type="checkbox" value="8"> Housing</label>
+                    <label><input id="Health" type="checkbox" value="4"> Health</label>
+                    <label><input id="Education" type="checkbox" value="2"> Education</label>
+                    <label><input id="Access" type="checkbox" value="1"> Access</label>
+                </div>
+                <button class="confirmButton" onclick="filterRecom()">submit</button>
+            </div>
+            <div class="filterBox">
+                <h4>Area Type</h4>
+                <div class="checkboxList">
+                    <label><input type="checkbox" value="A" id="city" onclick="fiterCity()"> City </label>
+                    <label><input type="checkbox" value="B" id="suburb" onclick="fiterSuburb()"> Surburb</label>
+                </div>
+            </div>
+            
+        </div>
+        <div id="map" style="width: 100%; height: 95%;z-index: 1"></div>
+        <script src="./JS/lealeft.js" type="text/javascript" charset="utf-8"></script>
+<!--         搜索框-->
+        <div id="searchBox">
+            <input type="text" placeholder="Please enter the area">
+            <button type="submit">Search</button>
+        </div>
+<!--    </div>-->
+
+    
+    <footer>
+        <div class="n1">
+            <div class="n2">
+            <dl>
+                <dt class="n3">KNOW US</dt>
+                <dd></dd>
+                <dt ><a href="#" class="n5">Introduction</a></dt>
+                <dd></dd>
+                <dt><a href="#" class="n5">Contact Us</a></dt>
+                <dd></dd>
+                <dt>E-mail: <a href="group7@gmail.com"  class="n5">group7@gmail.com</a></dt>
+                <dd></dd>
+                <dt>Tel: <a href="+64 0123456789"  class="n5">+64 0123456789</a></dt>
+                <dd></dd>
+            </dl>
+            </div>
+            <div class="n2">
+            <dl>
+                <dt class="n3">Services</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Our Companies</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Corporate Recruitment</a></dt>
+                <dd></dd>
+            </dl>
+            </div>
+            <div class="n2">
+            <dl>
+                <dt class="n3">Material Submission</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Submission channels</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Submission Instructions</a></dt>
+                <dd></dd>
+            </dl>
+            </div>
+            <div class="n2">
+            <dl>
+                <dt class="n3">Find housing</dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Smart Recommendations</a></dt>
+                <dd></dd>
+                <dt><a href="#"  class="n5">Manual search</a></dt>
+                <dd></dd>
+                <dt>
+                <a href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html">
+                    <img style="border:0;width:88px;height:31px"
+                        src="pics/vhtml.gif"
+                        alt="Valid HTML!" />
+                </a>
+            </dt>
+            <dd></dd>
+            <dt>
+                <a href="http://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fsfs-webdev.massey.ac.nz%2Fsite1734%2Fapps%2Fassignment%2F03%2Fmore.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=zh-cn">
+                    <img style="border:0;width:88px;height:31px"
+                        src="pics/vcss.gif"
+                        alt="Valid CSS!" />
+                </a>
+            </dt>
+            <dd></dd>
+            </dl>
+            </div>
+            <div class="n4">
+            <p> Copyright © 2023-2024 All rights reserved Group7 </p>
+            </div>
+        </div>
+        </footer>
+</body>
+</html>
