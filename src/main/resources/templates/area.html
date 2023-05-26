@@ -124,9 +124,10 @@
 
                 // 将评论数据显示在网页上
                 function displayComments() {
-                    var comments='[[${comment}]]';
-                    comments=JSON.parse(comments);
+                    var zid=parseInt('[[${zid}]]');
+                    var comments=getComments(zid);
                     console.log(comments);
+                    // comments=JSON.parse(comments);
                     var container = document.getElementById("comments-container");
                     container.innerHTML = "";
 

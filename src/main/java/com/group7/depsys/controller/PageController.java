@@ -2,6 +2,8 @@ package com.group7.depsys.controller;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.group7.depsys.entity.Comment;
 import com.group7.depsys.entity.Indicator;
 import com.group7.depsys.entity.User;
@@ -49,9 +51,9 @@ public class PageController {
 
     @DS("mysql")
     @RequestMapping("/area")
-    public String Area(@RequestParam(name="zid",defaultValue = "100001") int zid, @RequestParam(name="id",defaultValue = "-1") int id,Model model){
+    public String Area(@RequestParam(name="zid",defaultValue = "100001") int zid, @RequestParam(name="id",defaultValue = "-1") int id,Model model) throws JsonProcessingException {
         model.addAttribute("zoneData",attrs(zid).toString());
-        model.addAttribute("bound",getZoneBound(zid));
+//        model.addAttribute("bound",getZoneBound(zid));
         model.addAttribute("zid",zid);
         if(id>0) {
             QueryWrapper<User> queryWrapper=new QueryWrapper<>();
@@ -64,8 +66,13 @@ public class PageController {
         }
 //        QueryWrapper<Comment> queryWrapper=new QueryWrapper<>();
 //        queryWrapper.eq("zid",zid);
-        List<Comment> comments=commentMapper.selectComments(zid);
-        model.addAttribute("comment",comments);
+//        List<Comment> comments=commentMapper.selectComments(zid);
+//        comments.forEach(e->e.setContent(e.getContent().replace("'","\\'")));
+//        ObjectMapper objectMapper=new ObjectMapper();
+//        String json=objectMapper.writeValueAsString(comments);
+//        System.err.println(comments.toString());
+//        System.err.println(json);
+//        model.addAttribute("comment",json);
         return "area";
     }
 

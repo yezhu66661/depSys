@@ -50,8 +50,8 @@ public class ArticleController {
     //get User's comments from MySql
     @GetMapping("/getComments")
     public List<Comment> getComments(@Param("zid") int zid){
-        QueryWrapper<Comment> queryWrapper=new QueryWrapper<>();
-        queryWrapper.eq("zid",zid);
-        return commentMapper.selectList(queryWrapper);
+//        QueryWrapper<Comment> queryWrapper=new QueryWrapper<>();
+//        queryWrapper.eq("zid",zid);
+        return commentMapper.selectComments(zid);
     }
 }
