@@ -140,6 +140,10 @@ public class ZoneController {
         return str;
     }
 
+    @GetMapping("/getZoneName")
+    public String getZoneName(@Param("zid") int zid){
+        return zoneMapper.getName(zid).getGed2020nam();
+    }
 
 
 

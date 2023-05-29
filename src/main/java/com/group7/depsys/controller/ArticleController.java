@@ -54,4 +54,10 @@ public class ArticleController {
 //        queryWrapper.eq("zid",zid);
         return commentMapper.selectComments(zid);
     }
+
+
+    @GetMapping("/getCommentsBuUser")
+    public List<Comment> getCommentsByUser(@Param("uid") int uid){
+        return commentMapper.selectCommentsByUser(uid);
+    }
 }

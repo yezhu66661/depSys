@@ -1,16 +1,17 @@
+
 spring:
   datasource:
     dynamic:
       primary: pgsql
       datasource:
         mysql:
-          url: jdbc:mysql://localhost:3306/depmap?useSSL=false
-#          url: jdbc:mysql://localhost:3300/depmap?useSSL=false
+#          url: jdbc:mysql://localhost:3306/depmap?useSSL=false
+          url: jdbc:mysql://localhost:3300/depmap?useSSL=false
           username: root
           password: root
         pgsql:
-          url: jdbc:postgresql://localhost:5432/demo1?useSSL=false
-#          url: jdbc:postgresql://localhost:5432/webGis?useSSL=false
+#          url: jdbc:postgresql://localhost:5432/demo1?useSSL=false
+          url: jdbc:postgresql://localhost:5432/webGis?useSSL=false
           username: postgres
           password: 123
 mybatis:
@@ -39,4 +40,6 @@ mybatis:
 #  configuration:
 #    log-impl: org.apache.ibatis.logging.nologging.NoLoggingImpl
 #    map-underscore-to-camel-case: false
+server:
+  port: 80
 #    # 关闭mybatisplus处理大写字母的功能，否则会将A变为_a，从而无法插入

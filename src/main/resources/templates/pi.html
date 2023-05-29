@@ -7,11 +7,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.4.1.min.js" ></script>
     <title>Personal Information</title>
     <script src="./JS/globalVariable.js"></script>
     <link rel="stylesheet" href="css/pi.css">
     <link rel="icon" type="image/png" href="pics/info.svg" />
     <link rel="shortcut icon" type="image/png" href="pics/info.svg" />
+    <script>
+        function getZoneName(zid){
+            var res;
+            $.ajax({
+                url : serve_port+"/getZoneName?zid="+zid.toString(),
+                type : "get",
+                async : false,
+                success : function(data) {
+                    res=data;
+                    // console.lgo(recomLayerData.features.geometry.coordinates)
+                }});
+            return res;
+        }
+
+
+        function getCommentsByUser(id){
+            var res;
+            $.ajax({
+                url : serve_port+"/getCommentsBuUser?uid="+id.toString(),
+                type : "get",
+                async : false,
+                success : function(data) {
+                    res=data;
+                    console.log(data);
+                    // console.lgo(recomLayerData.features.geometry.coordinates)
+                }});
+            for(var i=0;i<res.length;i++){
+                res[i]["zoneName"]=getZoneName(parseInt(res[i]["zid"]));
+            }
+            return res;
+        }
+    </script>
 </head>
 <body>
     <div id="popup" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background-color: rgba(0, 0, 0, 0.5);z-index: 999;display:none">
@@ -42,7 +75,7 @@
             <li class="ali"><a href="area" id="area">Area Details</a></li>
             <li class="ali"><a href="more" id="more">Contact Us</a></li>
             <li class="ali"><a href="help" id="helppage">Help</a></li>
-            <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
+            <li class="ali"><a href="pi" id="pi">Personal Information</a></li>
             <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
                 <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
                 <button th:if="${user!=null}" onclick="logout()" id="logout">log out</button>
@@ -70,8 +103,9 @@
 
                             // 将评论数据显示在网页上
                             function displayComments() {
-                                var comments='[[${comment}]]';
-                                comments=JSON.parse(comments);
+                                var id='[[${id}]]'
+                                var comments=getCommentsByUser(id);
+                                // comments=JSON.parse(comments);
                                 console.log(comments);
                                 var container = document.getElementById("comments-container");
                                 container.innerHTML = "";

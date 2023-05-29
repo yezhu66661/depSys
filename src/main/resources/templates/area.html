@@ -35,7 +35,7 @@
             <li class="ali"><a href="area" id="area">Area Details</a></li>
             <li class="ali"><a href="more" id="more">Contact Us</a></li>
             <li class="ali"><a href="help" id="helppage">Help</a></li>
-            <li class="ali"><a href="pi" id="pi">Personal Imformation</a></li>
+            <li class="ali"><a href="pi" id="pi">Personal Information</a></li>
             <li class="cli"><a href="login"><img th:if="${user==null}" src="pics/user.svg" alt="login" id="login"></a>
                 <div th:if="${user!=null}" th:text="${user.name}" style="font-size:30px;"></div>
                 <button th:if="${user!=null}" onclick="logout()" id="logout">log out</button>
